@@ -6,7 +6,7 @@ import {
   SERIALIZED_VALUE_METADATA_MEMBER,
   SERIALIZED_VALUE_VALUE_MEMBER,
 } from "../constants/mod.ts";
-import { SerializedValue } from "../interfaces/mod.ts";
+import type { SerializedValue } from "../interfaces/mod.ts";
 import { serializables } from "../singletons/mod.ts";
 import {
   isArray,

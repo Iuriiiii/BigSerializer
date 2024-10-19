@@ -107,8 +107,8 @@ Deno.test("Object Serialization", async (t) => {
     assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]);
     // @ts-ignore: Check members
     assertExists(serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER]);
-    // @ts-ignore: Check members
     assert(
+      // @ts-ignore: Check members
       typeof serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string",
     );
     // @ts-ignore: Check members
@@ -132,41 +132,41 @@ Deno.test("Object Serialization", async (t) => {
     assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]);
     // @ts-ignore: Check members
     assertExists(serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER]);
-    // @ts-ignore: Check members
     assert(
+      // @ts-ignore: Check members
       typeof serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string",
     );
     // @ts-ignore: Check members
     assert(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object);
     // @ts-ignore: Check members
     assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA);
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_DATATYPE_MEMBER],
     );
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_VALUE_MEMBER],
     );
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER],
     );
-    // @ts-ignore: Check members
     assert(
+      // @ts-ignore: Check members
       typeof serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string",
     );
-    // @ts-ignore: Check members
     assert(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object,
     );
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_VALUE_MEMBER][SERIALIZED_VALUE_VALUE_MEMBER] ===
         1,
@@ -186,67 +186,67 @@ Deno.test("Object Serialization", async (t) => {
     assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]);
     // @ts-ignore: Check members
     assertExists(serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER]);
-    // @ts-ignore: Check members
     assert(
+      // @ts-ignore: Check members
       typeof serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string",
     );
     // @ts-ignore: Check members
     assert(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object);
     // @ts-ignore: Check members
     assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA);
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_DATATYPE_MEMBER],
     );
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_VALUE_MEMBER],
     );
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER],
     );
-    // @ts-ignore: Check members
     assert(
+      // @ts-ignore: Check members
       typeof serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string",
     );
-    // @ts-ignore: Check members
     assert(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object,
     );
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .refA[SERIALIZED_VALUE_VALUE_MEMBER][SERIALIZED_VALUE_VALUE_MEMBER] ===
         1,
     );
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .a[SERIALIZED_VALUE_DATATYPE_MEMBER],
     );
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .a[SERIALIZED_VALUE_VALUE_MEMBER],
     );
-    // @ts-ignore: Check members
     assert(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .a[SERIALIZED_VALUE_DATATYPE_MEMBER] === "instance",
     );
-    // @ts-ignore: Check members
     assertExists(
+      // @ts-ignore: Check members
       serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .a[SERIALIZED_VALUE_VALUE_MEMBER],
     );
-    // @ts-ignore: Check members
     assert(
+      // @ts-ignore: Check members
       typeof serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .a[SERIALIZED_VALUE_VALUE_MEMBER] === "string",
     );
