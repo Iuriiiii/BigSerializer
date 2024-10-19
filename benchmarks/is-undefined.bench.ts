@@ -1,10 +1,10 @@
 const _ = undefined;
 
 Deno.bench("check undefined with typeof", () => {
-    typeof _ === "undefined";
+  typeof _ === "undefined";
 });
 
 Deno.bench("check undefined with strict comparison", () => {
-    // @ts-ignore: Check number
-    _ === undefined;
+  // @ts-ignore: Check number
+  _ === undefined;
 });

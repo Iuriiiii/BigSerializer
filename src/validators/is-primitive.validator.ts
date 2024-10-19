@@ -7,7 +7,7 @@ import { isPlainObject } from "./is-plain-object.validator.ts";
 import { isString } from "./is-string.util.ts";
 import { isUndefined } from "./is-undefined.validator.ts";
 
-export function IsPrimitive(value: unknown) {
+export function IsPrimitive(value: unknown): boolean {
   return (
     isNull(value) ||
     isBoolean(value) ||

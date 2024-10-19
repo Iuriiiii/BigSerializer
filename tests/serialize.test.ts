@@ -2,10 +2,14 @@ import {
   assert,
   assertEquals,
   assertExists,
-  assertInstanceOf
+  assertInstanceOf,
 } from "@std/assert";
 import { serializeValue } from "../mod.ts";
-import { SERIALIZED_VALUE_DATATYPE_MEMBER, SERIALIZED_VALUE_INSTANCE_ID_MEMBER, SERIALIZED_VALUE_VALUE_MEMBER } from "../src/constants/mod.ts";
+import {
+  SERIALIZED_VALUE_DATATYPE_MEMBER,
+  SERIALIZED_VALUE_INSTANCE_ID_MEMBER,
+  SERIALIZED_VALUE_VALUE_MEMBER,
+} from "../src/constants/mod.ts";
 
 Deno.test("Primitives Serialization", async (t) => {
   await t.step("String value", () => {
@@ -104,7 +108,9 @@ Deno.test("Object Serialization", async (t) => {
     // @ts-ignore: Check members
     assertExists(serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER]);
     // @ts-ignore: Check members
-    assert(typeof serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string");
+    assert(
+      typeof serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string",
+    );
     // @ts-ignore: Check members
     assert(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object);
     // @ts-ignore: Check members
@@ -127,23 +133,44 @@ Deno.test("Object Serialization", async (t) => {
     // @ts-ignore: Check members
     assertExists(serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER]);
     // @ts-ignore: Check members
-    assert(typeof serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string");
+    assert(
+      typeof serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string",
+    );
     // @ts-ignore: Check members
     assert(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object);
     // @ts-ignore: Check members
     assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA);
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_DATATYPE_MEMBER]);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_DATATYPE_MEMBER],
+    );
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_VALUE_MEMBER]);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_VALUE_MEMBER],
+    );
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER]);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER],
+    );
     // @ts-ignore: Check members
-    assert(typeof serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string");
+    assert(
+      typeof serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string",
+    );
     // @ts-ignore: Check members
-    assert(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object);
+    assert(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object,
+    );
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_VALUE_MEMBER][SERIALIZED_VALUE_VALUE_MEMBER] === 1);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_VALUE_MEMBER][SERIALIZED_VALUE_VALUE_MEMBER] ===
+        1,
+    );
   });
 
   await t.step("Object with referencing another object", () => {
@@ -160,32 +187,68 @@ Deno.test("Object Serialization", async (t) => {
     // @ts-ignore: Check members
     assertExists(serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER]);
     // @ts-ignore: Check members
-    assert(typeof serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string");
+    assert(
+      typeof serializedValue[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string",
+    );
     // @ts-ignore: Check members
     assert(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object);
     // @ts-ignore: Check members
     assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA);
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_DATATYPE_MEMBER]);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_DATATYPE_MEMBER],
+    );
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_VALUE_MEMBER]);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_VALUE_MEMBER],
+    );
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER]);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER],
+    );
     // @ts-ignore: Check members
-    assert(typeof serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string");
+    assert(
+      typeof serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_INSTANCE_ID_MEMBER] === "string",
+    );
     // @ts-ignore: Check members
-    assert(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object);
+    assert(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_VALUE_MEMBER] instanceof Object,
+    );
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].refA[SERIALIZED_VALUE_VALUE_MEMBER][SERIALIZED_VALUE_VALUE_MEMBER] === 1);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .refA[SERIALIZED_VALUE_VALUE_MEMBER][SERIALIZED_VALUE_VALUE_MEMBER] ===
+        1,
+    );
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].a[SERIALIZED_VALUE_DATATYPE_MEMBER]);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .a[SERIALIZED_VALUE_DATATYPE_MEMBER],
+    );
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].a[SERIALIZED_VALUE_VALUE_MEMBER]);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .a[SERIALIZED_VALUE_VALUE_MEMBER],
+    );
     // @ts-ignore: Check members
-    assert(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].a[SERIALIZED_VALUE_DATATYPE_MEMBER] === "instance");
+    assert(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .a[SERIALIZED_VALUE_DATATYPE_MEMBER] === "instance",
+    );
     // @ts-ignore: Check members
-    assertExists(serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].a[SERIALIZED_VALUE_VALUE_MEMBER]);
+    assertExists(
+      serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .a[SERIALIZED_VALUE_VALUE_MEMBER],
+    );
     // @ts-ignore: Check members
-    assert(typeof serializedValue[SERIALIZED_VALUE_VALUE_MEMBER].a[SERIALIZED_VALUE_VALUE_MEMBER] === "string");
+    assert(
+      typeof serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
+        .a[SERIALIZED_VALUE_VALUE_MEMBER] === "string",
+    );
   });
 });

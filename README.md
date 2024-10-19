@@ -12,16 +12,14 @@ and generates some boilerplate on our projects.
 **BigSerializer** exports 2 functions and 1 decorator that will help you to
 serialize all the data that your project needs.
 
-✅ Generate a full JSON stringifable object from any correct value.
-✅ Preserve references.
-✅ Regenerate class instances.
+✅ Generate a full JSON stringifable object from any correct value. ✅ Preserve
+references. ✅ Regenerate class instances.
 
 ### Limitations
 
-❌ Just can serialize and decode classes that are decorated with the `@Serializable()` decorator.
-❌ Still not supporting binary arrays.
-❌ Still not supporting `Set` and `Map` datatypes.
-❌ Still not supporting buffers.
+❌ Just can serialize and decode classes that are decorated with the
+`@Serializable()` decorator. ❌ Still not supporting binary arrays. ❌ Still not
+supporting `Set` and `Map` datatypes. ❌ Still not supporting buffers.
 
 ### Exports
 
@@ -43,16 +41,16 @@ import { deserializeValue, Serializable, serializeValue } from "BigSerializer";
 
 @Serializable()
 class Entity {
-    public readonly creationDate = new Date();
-    constructor(public readonly type: string, public readonly name: string) {}
+  public readonly creationDate = new Date();
+  constructor(public readonly type: string, public readonly name: string) {}
 
-    // This is not needed... it is just to make tests easier!!
-    toPlain() {
-        return {
-            type: this.type,
-            name: this.name,
-        };
-    }
+  // This is not needed... it is just to make tests easier!!
+  toPlain() {
+    return {
+      type: this.type,
+      name: this.name,
+    };
+  }
 }
 
 const entityMateo = new Entity("human", "Mateo");
@@ -64,8 +62,8 @@ console.log(deserializedMateo instanceof Entity); // True!
 console.log(deserializedMateo.toPlain().type === entityMateo.type); // True!
 console.log(deserializedMateo.toPlain().name === entityMateo.name); // True!
 console.log(
-    deserializedMateo.creationDate.toISOString() ===
-        entityMateo.creationDate.toISOString(),
+  deserializedMateo.creationDate.toISOString() ===
+    entityMateo.creationDate.toISOString(),
 ); // True!
 console.log(deserializedMateo === entityMateo); // False!
 ```
