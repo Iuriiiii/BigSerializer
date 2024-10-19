@@ -9,7 +9,7 @@ import { isSerializableObject } from "./is-serializable-object.validator.ts";
 import { isString } from "./is-string.util.ts";
 import { isUndefined } from "./is-undefined.validator.ts";
 
-export function IsSerializable(value: unknown) {
+export function IsSerializable(value: unknown): boolean {
   const filters = [
     isNumber,
     isString,

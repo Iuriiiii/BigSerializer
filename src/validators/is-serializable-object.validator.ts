@@ -4,7 +4,7 @@ import { isClassObject } from "./mod.ts";
 import { isPlainObject } from "./mod.ts";
 import { isObject } from "./mod.ts";
 
-export function isSerializableObject(value: unknown) {
+export function isSerializableObject(value: unknown): boolean {
   return (
     isPlainObject(value) ||
     (isObject(value) &&
