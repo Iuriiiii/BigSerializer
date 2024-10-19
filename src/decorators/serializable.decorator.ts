@@ -1,14 +1,15 @@
 // Copyright (c) 2024 Oscar Alexander Casas
 // Licensed under the Commercial Use License. For inquiries, contact alexandercasasnqn@gmail.com
 import { serializables } from "../singletons/mod.ts";
-import { Constructor } from "../types/mod.ts";
+import type { Constructor } from "../types/mod.ts";
 import { deserializeValue, serializeValue } from "../utils/mod.ts";
 
 /**
  * Turns a class into a serializable class.
  * Use `serialize` and `deserialize`.
  */
-export function Serializable() {
+// deno-lint-ignore no-explicit-any
+export function Serializable(): any {
   return function (constructor: Constructor) {
     const _className = constructor.name;
     const Serializable = class extends constructor {
@@ -19,7 +20,7 @@ export function Serializable() {
 
         for (const field in this) {
           const value = this[field];
-          
+
           // @ts-ignore: Access to instances param.
           result[field] = serializeValue(value, instances);
         }
