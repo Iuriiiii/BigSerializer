@@ -1,4 +1,5 @@
 import {
+  assert,
   assertEquals,
   assertExists,
   assertInstanceOf,
@@ -98,6 +99,14 @@ Deno.test("Primitive Data Types Deserialization", async (t) => {
       (deserializedValue as Date).toISOString(),
       serializableValue.toISOString(),
     );
+  });
+
+  await t.step(`undefined === undefined`, () => {
+    const serializableValue = undefined;
+    const serializedValue = serializeValue(serializableValue);
+    const deserializedValue = deserializeValue(serializedValue);
+
+    assert(deserializedValue === undefined);
   });
 });
 
