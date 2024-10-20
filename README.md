@@ -12,14 +12,17 @@ and generates some boilerplate on our projects.
 **BigSerializer** exports 2 functions and 1 decorator that will help you to
 serialize all the data that your project needs.
 
-✅ Generate a full JSON stringifable object from any correct value. ✅ Preserve
-references. ✅ Regenerate class instances.
+- ✅ Generate a full JSON stringifable object from any correct value.
+- ✅ Preserve references.
+- ✅ Regenerate class instances.
 
 ### Limitations
 
-❌ Just can serialize and decode classes that are decorated with the
-`@Serializable()` decorator. ❌ Still not supporting binary arrays. ❌ Still not
-supporting `Set` and `Map` datatypes. ❌ Still not supporting buffers.
+- ❌ Just can serialize and decode classes that are decorated with the
+  `@Serializable()` decorator.
+- ❌ Still not supporting binary arrays. ❌ Still not supporting `Set` and `Map`
+  datatypes.
+- ❌ Still not supporting buffers.
 
 ### Exports
 
