@@ -85,7 +85,7 @@ Deno.test("Primitives Serialization", async (t) => {
   await t.step(`undefined === undefined`, () => {
     const serializableValue = undefined;
     const serializedValue = serializeValue(serializableValue);
-    
+
     assert(
       serializedValue === undefined,
       `Expected: serializedValue === undefined, got: serializedValue === ${serializedValue}`,

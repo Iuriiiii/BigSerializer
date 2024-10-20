@@ -18,8 +18,10 @@ serialize all the data that your project needs.
 
 ### Limitations
 
-- ❌ Just can serialize and decode classes that are decorated with the `@Serializable()` decorator.
-- ❌ Still not supporting binary arrays. ❌ Still not supporting `Set` and `Map` datatypes.
+- ❌ Just can serialize and decode classes that are decorated with the
+  `@Serializable()` decorator.
+- ❌ Still not supporting binary arrays. ❌ Still not supporting `Set` and `Map`
+  datatypes.
 - ❌ Still not supporting buffers.
 
 ### Exports
