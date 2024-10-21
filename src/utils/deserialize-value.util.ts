@@ -6,7 +6,8 @@ import {
   SERIALIZED_VALUE_METADATA_MEMBER,
   SERIALIZED_VALUE_VALUE_MEMBER,
 } from "../constants/mod.ts";
-import { isBinaryValue, serializables } from "../mod.ts";
+import { serializables } from "../singletons/mod.ts";
+import { isBinaryValue } from "../validators/mod.ts";
 
 /**
  * Deserializes a previous serialized value.
