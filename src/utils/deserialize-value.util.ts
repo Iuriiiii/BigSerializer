@@ -2,12 +2,15 @@
 // Licensed under the Commercial Use License. For inquiries, contact alexandercasasnqn@gmail.com
 import {
   SERIALIZED_VALUE_DATATYPE_MEMBER,
+  SERIALIZED_VALUE_EMPTY,
   SERIALIZED_VALUE_INSTANCE_ID_MEMBER,
   SERIALIZED_VALUE_METADATA_MEMBER,
   SERIALIZED_VALUE_VALUE_MEMBER,
 } from "../constants/mod.ts";
 import { serializables } from "../singletons/mod.ts";
-import { isBinaryValue } from "../validators/mod.ts";
+import type { Constructor, NativeMetadata } from "../types/mod.ts";
+import { isArray, isBinaryValue } from "../validators/mod.ts";
+import { deserializeClassArgument } from "./deserialize-class-argument.util.ts";
 
 /**
  * Deserializes a previous serialized value.
@@ -34,20 +37,36 @@ export function deserializeValue(value: unknown, instances = new Map()) {
     const serializedValue = value[SERIALIZED_VALUE_VALUE_MEMBER];
 
     switch (value[SERIALIZED_VALUE_DATATYPE_MEMBER]) {
+      case "empty": {
+        if (value[SERIALIZED_VALUE_VALUE_MEMBER] === null) {
+          return SERIALIZED_VALUE_EMPTY;
+        }
+
+        return value;
+      }
       case "class": {
-        const Serializable = serializables.get(className);
-        const instance = new Serializable();
+        const { clazz, args } = deserializeClassArgument(
+          serializedValue,
+          className as NativeMetadata,
+          instances,
+        );
+        const Serializable: Constructor = clazz ?? serializables.get(className);
+        // console.log("src/utils/deserialize-value.util.ts:55->function", {
+        //   args,
+        //   Serializable
+        // });
+        const instance = new Serializable(...args);
+
+        // console.log('src/utils/deserialize-value.util.ts:61->function', instance);
 
         instances.set(instanceId, instance);
 
+        if (clazz) {
+          return instance;
+        }
+
         // @ts-ignore: Access to deserialize().
         return instance.deserialize(serializedValue, instances);
-      }
-      case "date": {
-        const date = new Date(serializedValue as string);
-        instances.set(instanceId, date);
-
-        return date;
       }
       case "instance": {
         return instances.get(serializedValue);
@@ -67,6 +86,20 @@ export function deserializeValue(value: unknown, instances = new Map()) {
         return result;
       }
     }
+  } else if (isArray(value)) {
+    const res: unknown[] = [];
+    for (let i = 0; i < value.length; i++) {
+      // @ts-ignore: Set instances
+      const deserialized = deserializeValue(value[i], instances);
+
+      if (deserialized === SERIALIZED_VALUE_EMPTY) {
+        continue;
+      }
+
+      res[i] = deserialized;
+    }
+
+    return res;
   }
 
   return value;

@@ -8,7 +8,11 @@ import type {
 } from "../constants/mod.ts";
 
 export interface SerializedValue {
-  [SERIALIZED_VALUE_DATATYPE_MEMBER]: "date" | "class" | "instance" | "object";
+  [SERIALIZED_VALUE_DATATYPE_MEMBER]:
+    | "class"
+    | "instance"
+    | "object"
+    | "empty";
   [SERIALIZED_VALUE_VALUE_MEMBER]: unknown;
   [SERIALIZED_VALUE_METADATA_MEMBER]?: string;
   [SERIALIZED_VALUE_INSTANCE_ID_MEMBER]?: string;

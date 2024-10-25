@@ -9,11 +9,11 @@ import { isUndefined } from "./is-undefined.validator.ts";
 
 export function IsPrimitive(value: unknown): boolean {
   return (
-    isNull(value) ||
-    isBoolean(value) ||
-    isUndefined(value) ||
     isNumber(value) ||
     isString(value) ||
+    isBoolean(value) ||
+    isUndefined(value) ||
+    isNull(value) ||
     isPlainObject(value)
   );
 }

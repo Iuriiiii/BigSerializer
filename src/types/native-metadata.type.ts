@@ -1,0 +1,15 @@
+export type NativeMetadata =
+  | "Uint8Array"
+  | "Int8Array"
+  | "Uint16Array"
+  | "Int16Array"
+  | "Uint32Array"
+  | "Int32Array"
+  | "BigUint64Array"
+  | "BigInt64Array"
+  | "Float16Array"
+  | "Float32Array"
+  | "Float64Array"
+  | "Date"
+  | "RegExp"
+  | "Error";

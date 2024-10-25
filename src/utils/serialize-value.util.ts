@@ -2,6 +2,7 @@
 // Licensed under the Commercial Use License. For inquiries, contact alexandercasasnqn@gmail.com
 import {
   SERIALIZED_VALUE_DATATYPE_MEMBER,
+  SERIALIZED_VALUE_EMPTY,
   SERIALIZED_VALUE_INSTANCE_ID_MEMBER,
   SERIALIZED_VALUE_METADATA_MEMBER,
   SERIALIZED_VALUE_VALUE_MEMBER,
@@ -16,8 +17,12 @@ import {
   isNaN,
   isPlainObject,
   IsPrimitive,
+  isRegex,
+  isSerializableNativeClass,
 } from "../validators/mod.ts";
 import { randomString } from "./random-string.util.ts";
+import { serializeClassArgument } from "./serialize-class-argument.util.ts";
+import { serializeMetadata } from "./serialize-metadata.util.ts";
 
 function resolveInstance(value: unknown, instances: Map<unknown, string>) {
   return {
@@ -45,10 +50,7 @@ function serializePrimitive(value: unknown, instances: Map<unknown, string>) {
 
   for (const key in value) {
     // @ts-ignore: Able array access.
-    const objectValue = value[key] as unknown;
-
-    // @ts-ignore: Able array access.
-    result[key] = serializeValue(objectValue, instances);
+    result[key] = serializeValue(value[key] as unknown, instances);
   }
 
   return {
@@ -68,35 +70,41 @@ export function serializeValue(value: unknown, instances = new Map()): unknown {
   if (IsPrimitive(value)) {
     return serializePrimitive(value, instances);
   } else if (isArray(value)) {
-    // @ts-ignore: Access to instances param
-    return value.map((item: unknown) => serializeValue(item, instances));
-  } else if (isDate(value)) {
-    if (instances.has(value)) {
-      return resolveInstance(value, instances);
+    const res: unknown[] = [];
+    for (let i = 0; i < value.length; i++) {
+      if (!(i in value)) {
+        // @ts-ignore: use instances
+        res[i] = SERIALIZED_VALUE_EMPTY;
+      } else {
+        // @ts-ignore: use instances
+        res[i] = serializeValue(value[i], instances);
+      }
     }
 
-    const instanceId = randomString();
-    instances.set(value, instanceId);
+    return res;
+  }
 
-    return {
-      [SERIALIZED_VALUE_DATATYPE_MEMBER]: "date",
-      [SERIALIZED_VALUE_METADATA_MEMBER]: "Date",
-      [SERIALIZED_VALUE_INSTANCE_ID_MEMBER]: instanceId,
-      [SERIALIZED_VALUE_VALUE_MEMBER]: value.toISOString(),
-    } satisfies SerializedValue;
-  } else if (isClassInstance(value)) {
-    if (!serializables.has(value.constructor)) {
+  const _isSerializableNativeClass = isSerializableNativeClass(value);
+  const _isDate = isDate(value);
+  const _isRegex = isRegex(value);
+
+  if (isClassInstance(value)) {
+    if (
+      !serializables.has(value.constructor) &&
+      !_isSerializableNativeClass &&
+      !_isDate &&
+      !_isRegex
+    ) {
       throw new Error("Non serializable data type detected.");
     }
+
     const instanceId = randomString();
     instances.set(value, instanceId);
 
     return {
       [SERIALIZED_VALUE_DATATYPE_MEMBER]: "class",
-      // @ts-ignore: Serialize method.
-      [SERIALIZED_VALUE_VALUE_MEMBER]: value.serialize(instances),
-      // @ts-ignore: Get original class name.
-      [SERIALIZED_VALUE_METADATA_MEMBER]: value.originalName,
+      [SERIALIZED_VALUE_VALUE_MEMBER]: serializeClassArgument(value, instances),
+      [SERIALIZED_VALUE_METADATA_MEMBER]: serializeMetadata(value),
       [SERIALIZED_VALUE_INSTANCE_ID_MEMBER]: instanceId,
     } satisfies SerializedValue;
   }
