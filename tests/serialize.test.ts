@@ -8,6 +8,7 @@ import { serializeValue } from "../mod.ts";
 import {
   SERIALIZED_VALUE_DATATYPE_MEMBER,
   SERIALIZED_VALUE_INSTANCE_ID_MEMBER,
+  SERIALIZED_VALUE_METADATA_MEMBER,
   SERIALIZED_VALUE_VALUE_MEMBER,
 } from "../src/constants/mod.ts";
 
@@ -260,5 +261,41 @@ Deno.test("Object Serialization", async (t) => {
       typeof serializedValue[SERIALIZED_VALUE_VALUE_MEMBER]
         .a[SERIALIZED_VALUE_VALUE_MEMBER] === "string",
     );
+  });
+
+  await t.step("Array elements are serialized", () => {
+    const serializableValue = [1, new Date(), "hello"];
+    const serializedValue = serializeValue(serializableValue);
+
+    assertInstanceOf(serializedValue, Array);
+    assert(serializedValue.length === 3);
+    assert(serializedValue[0] === 1);
+    // @ts-ignore: Check members
+    assert(serializedValue[1][SERIALIZED_VALUE_DATATYPE_MEMBER] === "class");
+    // @ts-ignore: Check members
+    assert(serializedValue[1][SERIALIZED_VALUE_METADATA_MEMBER] === "Date");
+    assert(serializedValue[2] === "hello");
+  });
+
+  await t.step("Array elements has empty elements", () => {
+    const serializableValue = [1, , , new Date(), "hello", , 3];
+    const serializedValue = serializeValue(serializableValue);
+
+    assertInstanceOf(serializedValue, Array);
+    assert(serializedValue.length === 7);
+    assert(serializedValue[0] === 1);
+    assert(serializedValue[4] === "hello");
+    // @ts-ignore: Check members
+    assert(serializedValue[3][SERIALIZED_VALUE_DATATYPE_MEMBER] === "class");
+    // @ts-ignore: Check members
+    assert(serializedValue[3][SERIALIZED_VALUE_METADATA_MEMBER] === "Date");
+    assert(serializedValue[6] === 3);
+
+    // @ts-ignore: Check members
+    assert(serializedValue[1][SERIALIZED_VALUE_DATATYPE_MEMBER] === "empty");
+    // @ts-ignore: Check members
+    assert(serializedValue[2][SERIALIZED_VALUE_DATATYPE_MEMBER] === "empty");
+    // @ts-ignore: Check members
+    assert(serializedValue[5][SERIALIZED_VALUE_DATATYPE_MEMBER] === "empty");
   });
 });

@@ -16,3 +16,6 @@ export * from "./is-primitive.validator.ts";
 export * from "./is-class-instance.validator.ts";
 export * from "./is-boolean.validator.ts";
 export * from "./is-array.validator.ts";
+export * from "./is-serializable-native-class.validator.ts";
+export * from "./is-regex.validator.ts";
+export * from "./is-error.validator.ts";

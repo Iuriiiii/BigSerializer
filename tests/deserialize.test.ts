@@ -234,7 +234,9 @@ class TestClass {
 Deno.test("Class Deserialization", async (t) => {
   await t.step(`TestClass === TestClass`, () => {
     const serializableValue = new TestClass();
+    console.log("tests/deserialize.test.ts:238->function", serializableValue);
     const serializedValue = serializeValue(serializableValue);
+    console.log("tests/deserialize.test.ts:238->function", serializedValue);
     const deserializedValue = deserializeValue(serializedValue);
 
     assertInstanceOf(deserializedValue, TestClass);
@@ -256,5 +258,41 @@ Deno.test("Class Deserialization", async (t) => {
       deserializedValue.date.toISOString(),
       serializableValue.date.toISOString(),
     );
+  });
+
+  await t.step("Array elements are serialized", () => {
+    const serializableValue = [1, new Date(), "hello"];
+    const serializedValue = serializeValue(serializableValue);
+    const deserializedValue = deserializeValue(serializedValue);
+
+    assertInstanceOf(deserializedValue, Array);
+    assert(deserializedValue.length === 3);
+    assert(deserializedValue[0] === 1);
+    assertInstanceOf(deserializedValue[1], Date);
+    assert(
+      (deserializedValue[1] as Date).toISOString() ===
+        (serializableValue[1] as Date).toISOString(),
+    );
+    assert(deserializedValue[2] === "hello");
+  });
+
+  await t.step("Array elements has empty elements", () => {
+    const serializableValue = [1, , , new Date(), "hello", , 3];
+    const serializedValue = serializeValue(serializableValue);
+    const deserializedValue = deserializeValue(serializedValue);
+
+    assertInstanceOf(deserializedValue, Array);
+    assert(deserializedValue.length === 7);
+    assert(deserializedValue[0] === 1);
+    assert(deserializedValue[4] === "hello");
+    assertInstanceOf(deserializedValue[3], Date);
+    assert(
+      (deserializedValue[3] as Date).toISOString() ===
+        (serializableValue[3] as Date).toISOString(),
+    );
+    assert(deserializedValue[6] === 3);
+    assert(!(1 in deserializedValue));
+    assert(!(2 in deserializedValue));
+    assert(!(5 in deserializedValue));
   });
 });

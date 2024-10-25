@@ -15,13 +15,13 @@ serialize all the data that your project needs.
 - ✅ Generate a full JSON stringifable object from any correct value.
 - ✅ Preserve references.
 - ✅ Regenerate class instances.
+- ✅ Supporting binary arrays serialization.
 
 ### Limitations
 
 - ❌ Just can serialize and decode classes that are decorated with the
   `@Serializable()` decorator.
-- ❌ Still not supporting binary arrays. ❌ Still not supporting `Set` and `Map`
-  datatypes.
+- ❌ Still not supporting `Set` and `Map` datatypes.
 - ❌ Still not supporting buffers.
 
 ### Exports
